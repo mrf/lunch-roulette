@@ -1,10 +1,9 @@
-#!/bin/python2
+#!/usr/bin/python
 
 from __future__ import print_function
 
-# Set our document type so that we can render it (python is weird)
-print("Content-Type: text/plain;charset=utf-8")
-
+# Set our document type so that CGI can render it
+print("Content-Type: text/html\n\n")
 
 # TODO: Multiline print would look cleaner
 print("<html>")
