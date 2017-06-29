@@ -12,5 +12,9 @@ chkconfig httpd on
 cd /var/www/html/
 git clone https://github.com/mrf/lunch-roulette.git
 
-# Install Python SDK for AWS
+# Install Python SDK for AWS so we can connect to dynamo
 pip install boto3
+
+# Set our default region to avoid confusing later commands
+echo "[default]" >> ~/.aws/config
+echo "region = us-west-1" >> ~/.aws/config
