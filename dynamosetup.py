@@ -1,13 +1,30 @@
 #!/bin/python2
 # Creates our DynamoDB table structure
 
-import boto.dynamodb2
+from __future__ import print_function
 
-from boto.dynamodb2.fields import HashKey
-from boto.dynamodb2.table import Table
+import boto3
 
-people = Table.create('people', schema=[
-    HashKey('username'), # defaults to STRING data_type
-])
+client = boto3.client('dynamodb')
 
-print('created table people')
+response = client.create_table(
+    TableName='People',
+    AttributeDefinitions=[
+        {
+            'AttributeName': 'name',
+            'AttributeType': 'S',
+        },
+    ],
+    KeySchema=[
+        {
+            'AttributeName': 'name',
+            'KeyType': 'HASH',
+        },
+    ],
+    ProvisionedThroughput={
+        'ReadCapacityUnits': 5,
+        'WriteCapacityUnits': 5,
+    },
+)
+
+print(response)
