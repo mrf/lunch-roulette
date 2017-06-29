@@ -16,11 +16,14 @@ print("  <body>")
 print("     <h1>Welcome to Lunch Roulette!</h1>")
 print('<pre>')
 
+#try:
+EVERYONE = listing.full_table()
+#except:
+#    print("<p>Error: %s</p>" % str(Exception))
 
-try:
-    everyone = listing.full_table()
-except Exception as e:
-    print("<p>Error: %s</p>" % str(e))
+for person in EVERYONE:
+    print(person)
+
 print('</pre>')
 print("  </body>")
 print("</html>")
