@@ -1,4 +1,4 @@
-#!/bin/python2
+#!/usr/bin/python
 # Creates our DynamoDB table structure
 
 from __future__ import print_function

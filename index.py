@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 from __future__ import print_function
+import requests
 
 # Set our document type so that CGI can render it
 print("Content-Type: text/html\n\n")
@@ -12,5 +13,8 @@ print('    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstra
 print("  </head>")
 print("  <body>")
 print("     <h1>Welcome to Lunch Roulette!</h1>")
+
+listing = requests.get('http://localhost/lunch-roulette/listing.py', allow_redirects=True)
+
 print("  </body>")
 print("</html>")
