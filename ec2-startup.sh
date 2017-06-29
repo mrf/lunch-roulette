@@ -3,8 +3,17 @@
 # Get everything up to date
 yum update -y
 
-# Get apache + git installed, started up and autostarted on instance restart
+# Get apache + git installed
 yum install httpd git -y
+
+# Write basic python config for apache
+echo "<Directory /var/www/html/lunch-roulette>" >> /etc/httpd/conf.d/python.conf
+echo "    Options +ExecCGI" >> /etc/httpd/conf.d/python.conf
+echo "    DirectoryIndex index.py" >> /etc/httpd/conf.d/python.conf
+echo "</Directory>" >> /etc/httpd/conf.d/python.conf
+echo "AddHandler cgi-script .py" >> /etc/httpd/conf.d/python.conf
+
+# Get apache started up and auto-restarted on instance restart
 service httpd start
 chkconfig httpd on
 
