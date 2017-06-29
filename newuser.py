@@ -29,6 +29,6 @@ print('    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstra
 print("  </head>")
 print("  <body>")
 print("     <h1>Please Insert a User</h1>")
-print('     <form action="/newuser.py">Name:<input type="text" name="name"></form>')
+print('     <form action="newuser.py">Name:<input type="text" name="name"></form>')
 print("  </body>")
 print("</html>")

@@ -20,7 +20,7 @@ print('    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstra
 print("  </head>")
 print("  <body>")
 print("     <h1>Welcome to Lunch Roulette!</h1>")
-print('     <a href="/newuser.py">Create new user</a>')
+print('     <a href="newuser.py">Create new user</a>')
 
 # Pull in our full list from Dynamo
 EVERYONE = listing.full_table()
