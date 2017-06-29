@@ -21,9 +21,6 @@ chkconfig httpd on
 cd /var/www/html/
 git clone https://github.com/mrf/lunch-roulette.git
 
-# Set permissions to executable
-chmod +x index.py
-
 # Install Python SDK for AWS so we can connect to dynamo
 pip install boto3
 
