@@ -6,6 +6,6 @@ import boto3
 
 client = boto3.client('dynamodb')
 
-table = client.scan(TableName="people")
+response = client.scan(TableName="People")
 
-print(table)
+print(response)
