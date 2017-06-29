@@ -30,18 +30,18 @@ RANDOMIZED = random.sample(EVERYONE, COUNT)
 print("<h2>{} people showed up to lunch today.</h2>".format(COUNT))
 
 GROUPCOUNT = COUNT / 5
-print(GROUPCOUNT)
+print("Should be {} groups".format(GROUPCOUNT))
 
 MINGROUPSIZE = 3
 MAXGROUPSIZE = 5
 
 # Use itertools library to chunk our list
-# TODO very close but leaves out people that don't fit into a group...
-CHUNKED_LIST = list(zip(*[iter(RANDOMIZED)]*5))
+CHUNKED_LIST = list(zip_longest(fillvalue='', *[iter(RANDOMIZED)]*5))
 
-print('<pre>')
-print(CHUNKED_LIST)
-print('</pre>')
-
+print('    <ul>')
+# TODO some  groups are too small
+for group in CHUNKED_LIST:
+    print('      <li>{}</li>'.format(group))
+print('    </ul>')
 print("  </body>")
 print("</html>")
