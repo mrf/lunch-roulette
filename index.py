@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 from __future__ import print_function
-import sys
+import random
 import listing
 
 # Set our document type so that CGI can render it
@@ -14,14 +14,20 @@ print('    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstra
 print("  </head>")
 print("  <body>")
 print("     <h1>Welcome to Lunch Roulette!</h1>")
-print('<pre>')
 
-#try:
+# Pull in our full list from Dynamo
 EVERYONE = listing.full_table()
-#except:
-#    print("<p>Error: %s</p>" % str(Exception))
+COUNT = len(EVERYONE)
+# Randomize the list before we break it up
+RANDOMIZED = random.sample(EVERYONE, COUNT)
 
-for person in EVERYONE:
+print("{} people showed up to lunch today.".format(COUNT))
+
+GROUPCOUNT = COUNT / 5
+print(GROUPCOUNT)
+
+print('<pre>')
+for person in RANDOMIZED:
     print(person)
 
 print('</pre>')
