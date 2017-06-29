@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 from __future__ import print_function
+import sys
 import listing
 
 # Set our document type so that CGI can render it
@@ -14,9 +15,12 @@ print("  </head>")
 print("  <body>")
 print("     <h1>Welcome to Lunch Roulette!</h1>")
 print('<pre>')
-everyone = listing.full_table()
-for person in everyone:
-    print(person['name']['S'])
+
+
+try:
+    everyone = listing.full_table()
+except Exception as e:
+    print("<p>Error: %s</p>" % str(e))
 print('</pre>')
 print("  </body>")
 print("</html>")
