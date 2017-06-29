@@ -6,7 +6,6 @@ import boto3
 
 def full_table():
     """Return all results from Dynamo"""
-    client = boto3.client('dynamodb')
+    client = boto3.client('dynamodb', region_name='us-west-1')
     response = client.scan(TableName="People")
-    # TODO return as a clean object
     return response['Items']
