@@ -41,7 +41,7 @@ MAXGROUPSIZE = 5
 CHUNKED_LIST = list(zip_longest(fillvalue='', *[iter(RANDOMIZED)]*5))
 
 print('    <ul>')
-# TODO some  groups are too small
+# TODO some  groups are too small just need to grab N users from previous to make 3
 for group in CHUNKED_LIST:
     print('      <li>{}</li>'.format(group))
 print('    </ul>')
