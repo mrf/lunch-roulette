@@ -7,22 +7,24 @@ import boto3
 
 CLIENT = boto3.client('dynamodb', region_name='us-west-1')
 
-QUERY = os.environ['QUERY_STRING']
-QUERY_PIECES = QUERY.split('=')
-USER = QUERY_PIECES[1]
 
-# Prevent bots filling form with junk
-if QUERY_PIECES[0] == 'name':
-    # Send our user query to Dynamo
-    RESPONSE = CLIENT.put_item(
-        TableName="People",
-        Item={
-            'name': {
-                'S': USER,
-            }
-        },
-        ReturnConsumedCapacity='TOTAL',
-    )
+if os.environ['QUERY_STRING']:
+    QUERY = os.environ['QUERY_STRING']
+    QUERY_PIECES = QUERY.split('=')
+    USER = QUERY_PIECES[1]
+
+    # Prevent bots filling form with junk
+    if QUERY_PIECES[0] == 'name':
+        # Send our user query to Dynamo
+        RESPONSE = CLIENT.put_item(
+            TableName="People",
+            Item={
+                'name': {
+                    'S': USER,
+                }
+            },
+            ReturnConsumedCapacity='TOTAL',
+        )
 
 # Set our document type so that CGI can render it
 print("Content-Type: text/html\n\n")
