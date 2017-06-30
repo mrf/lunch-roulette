@@ -28,22 +28,47 @@ COUNT = len(EVERYONE)
 # Randomize the list before we break it up
 RANDOMIZED = random.sample(EVERYONE, COUNT)
 
-print("<h2>{} people showed up to lunch today.</h2>".format(COUNT))
-
-GROUPCOUNT = COUNT / 5
-print("Should be {} groups".format(GROUPCOUNT))
+print("     <h2>{} people showed up to lunch today.</h2>".format(COUNT))
 
 MINGROUPSIZE = 3
 MAXGROUPSIZE = 5
 
-# Use itertools library to chunk our list
-# TODO turn into button and save into Dynamo
-CHUNKED_LIST = list(zip_longest(fillvalue='', *[iter(RANDOMIZED)]*5))
+# TODO turn following into button and save into Dynamo
 
-print('    <ul>')
-# TODO some  groups are too small just need to grab N users from previous to make 3
+# Use itertools library to chunk our list
+CHUNKED_LIST = list(zip_longest(fillvalue='<<>>', *[iter(RANDOMIZED)]*5))
+
+print('     <ul>')
+
+# Checking to see if we have and groups that are too small
+for i, group in enumerate(CHUNKED_LIST):
+    if group.count('<<>>') > 2:
+        new_group = list(group)
+        # And back to tuple as we save
+        CHUNKED_LIST[i] = tuple(new_group)
+        # Group 0 is never to small so we steal from there
+        source_group = list(CHUNKED_LIST[0])
+
+        # Its a Tuple so we have to make editable
+        new_group = list(group)
+
+        # Check how many we need to move around
+        if group.count('<<>>') == 4:
+            new_group[2], source_group[1] = source_group[1], new_group[2]
+            new_group[3], source_group[2] = source_group[2], new_group[3]
+        elif group.count('<<>>') == 3:
+            new_group[2], source_group[1] = source_group[1], new_group[2]
+
+        # Convert back to tuple so we don't lose in this execution
+        CHUNKED_LIST[i] = tuple(new_group)
+        CHUNKED_LIST[0] = tuple(source_group)
+
 for group in CHUNKED_LIST:
-    print('      <li>{}</li>'.format(group))
+    print('      <li>')
+
+    for person in group:
+        print('          <li>{}</li>'.format(person))
+    print('      </li>')
 print('    </ul>')
 print("  </body>")
 print("</html>")

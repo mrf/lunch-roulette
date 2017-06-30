@@ -7,7 +7,8 @@ import boto3
 
 client = boto3.client('dynamodb')
 
-response = client.create_table(
+"""
+people_response = client.create_table(
     TableName='People',
     AttributeDefinitions=[
         {
@@ -26,5 +27,35 @@ response = client.create_table(
         'WriteCapacityUnits': 5,
     },
 )
+"""
 
-print(response)
+groups_response = client.create_table(
+    TableName='Groups',
+    AttributeDefinitions=[
+        {
+            'AttributeName': 'ID',
+            'AttributeType': 'N',
+        },
+        {
+            'AttributeName': 'Members',
+            'AttributeType': 'SS',
+        },
+    ],
+    KeySchema=[
+        {
+            'AttributeName': 'ID',
+            'KeyType': 'HASH',
+        },
+        {
+            'AttributeName': 'Members',
+            'KeyType': 'HASH',
+        },
+    ],
+    ProvisionedThroughput={
+        'ReadCapacityUnits': 5,
+        'WriteCapacityUnits': 5,
+    },
+)
+
+#print(people_response)
+print(groups_response)
