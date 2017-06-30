@@ -65,9 +65,12 @@ for i, group in enumerate(CHUNKED_LIST):
 
 for group in CHUNKED_LIST:
     print('      <li>')
+    print('      <ul>')
 
     for person in group:
         print('          <li>{}</li>'.format(person))
+
+    print('      </ul>')
     print('      </li>')
 print('    </ul>')
 print("  </body>")
